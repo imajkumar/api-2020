@@ -63,7 +63,7 @@ class ApiController extends Controller
             
         }
 
-        DB::table('users')->insert(
+        $result=DB::table('users')->insert(
             [
                 'first_name' => $first_name,
                 'last_name' => $last_name,
@@ -78,12 +78,12 @@ class ApiController extends Controller
             ]
         );
 
-
+        return $this->setSuccessResponse($result,"Registedred Saved succesfully",'oo');
 
 
         // $user = User::create(['avatar'=>$photo,'first_name'=>$first_name,'last_name' =>$last_name,'phone' => $phone, 'email' => $email, 'password' => Hash::make($password)]);
         //return $this->setSuccessResponse($user,"Registedred Saved succesfully",'oo');
-        echo "dd5";
+        
     }
     //
 }
