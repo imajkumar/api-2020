@@ -90,4 +90,44 @@ class ApiController extends Controller
         
     }
     //
+
+    public function login(Request $request)
+    {
+        $email =$request->email;
+        $password =$request->password;
+
+        try{
+            $credentials = $request->only('email', 'password');
+
+            $rules = [
+                'email' => 'required|email',
+                'password' => 'required',
+            ];
+    
+            $validator = Validator::make($credentials, $rules);
+    
+            if ($validator->fails()) {
+                return response()->json(['success' => false, 'error' => $validator->messages()]);
+            }
+            
+             $hashedPassword = DB::table('users')->where('email', $email)->first();
+            // $hashedPassword = User::where('email', $request->email)->first();
+             //print_r($hashedPassword);
+             //die;
+
+
+            if (Hash::check($password, optional($hashedPassword)->password)) {
+                return $this->setSuccessResponse($hashedPassword,"Login succesfully",'oo');
+
+            }else{
+                return $this->setSuccessResponse($hashedPassword,"Failed-LOGIN",$hashedPassword);
+            }
+
+
+
+        }
+         catch(\Exception $ex){
+            return $this->setErrorResponse($ex->getMessage());
+          }
+    }
 }

@@ -17,4 +17,6 @@ $router->get('/', function () use ($router) {
 
 $router->group(['prefix' => 'api'], function () use ($router) {
     $router->post('register','ApiController@register');
+    $router->post('login','ApiController@login');
+
 });
