@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\user;
+use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Validator;
@@ -77,6 +77,10 @@ class ApiController extends Controller
                 'role_name' =>$role_name 
             ]
         );
+
+        $id = DB::getPdo()->lastInsertId();
+
+        $result = User::find($id);
 
         return $this->setSuccessResponse($result,"Registedred Saved succesfully",'oo');
 
