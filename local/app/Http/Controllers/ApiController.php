@@ -116,7 +116,7 @@ class ApiController extends Controller
              //die;
 
 
-            if (Hash::check($password, optional($hashedPassword)->password)) {
+            if (Hash::check($password, $hashedPassword->password)) {
                 return $this->setSuccessResponse($hashedPassword,"Login succesfully",'oo');
 
             }else{
