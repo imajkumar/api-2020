@@ -120,7 +120,7 @@ class ApiController extends Controller
                 return $this->setSuccessResponse($hashedPassword,"Login succesfully",'oo');
 
             }else{
-                return $this->setSuccessResponse($hashedPassword,"Failed-LOGIN",$hashedPassword);
+                return $this->setErrorResponse($hashedPassword,"Failed-LOGIN",$hashedPassword);
             }
 
 
