@@ -93,8 +93,9 @@ class ApiController extends Controller
 
     public function login(Request $request)
     {
-        $email =$request->email;
-        $password =$request->password;
+         $email =$request->email;
+         $password =$request->password;
+        
 
         try{
             $credentials = $request->only('email', 'password');
@@ -110,8 +111,8 @@ class ApiController extends Controller
                 return response()->json(['success' => false, 'error' => $validator->messages()]);
             }
             
-             $hashedPassword = DB::table('users')->where('email', $email)->first();
-            // $hashedPassword = User::where('email', $request->email)->first();
+            // $hashedPassword = DB::table('users')->where('email', $email)->first();
+             $hashedPassword = User::where('email', $request->email)->first();
              //print_r($hashedPassword);
              //die;
 
@@ -120,7 +121,7 @@ class ApiController extends Controller
                 return $this->setSuccessResponse($hashedPassword,"Login succesfully",'oo');
 
             }else{
-                return $this->setErrorResponse($hashedPassword,"Failed-LOGIN",$hashedPassword);
+                return $this->setErrorResponse([],"Failed-LOGIN",$hashedPassword);
             }
 
 
