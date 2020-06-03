@@ -31,6 +31,57 @@ class ApiController extends Controller
         $pincode = $request->pincode;       
         $aadharno = $request->aadharno;
         $pandcardno = $request->pandcardno;
+        $aadharno_1="";
+        $aadharno_2="";
+        $pandcardno_1="";
+        $pandcardno_2="";
+        if ($request->hasFile('aadharno_1')) {
+
+            $file = $request->file('aadharno_1');
+
+            $fileName = 'aadharno_1' . rand() . "_" . date('dmyhis') . "." . $file->getClientOriginalExtension();
+
+            $destinationPath = 'uploads';
+            $file->move($destinationPath, $fileName);
+            $aadharno_1=$fileName;
+        }
+
+        if ($request->hasFile('aadharno_2')) {
+
+            $file = $request->file('aadharno_2');
+
+            $fileName = 'aadharno_2' . rand() . "_" . date('dmyhis') . "." . $file->getClientOriginalExtension();
+
+            $destinationPath = 'uploads';
+            $file->move($destinationPath, $fileName);
+            $aadharno_2=$fileName;
+        }
+
+        if ($request->hasFile('pandcardno_1')) {
+
+            $file = $request->file('pandcardno_1');
+
+            $fileName = 'pandcardno_1' . rand() . "_" . date('dmyhis') . "." . $file->getClientOriginalExtension();
+
+            $destinationPath = 'uploads';
+            $file->move($destinationPath, $fileName);
+            $pandcardno_1=$fileName;
+        }
+
+        if ($request->hasFile('pandcardno_2')) {
+
+            $file = $request->file('pandcardno_2');
+
+            $fileName = 'pandcardno_2' . rand() . "_" . date('dmyhis') . "." . $file->getClientOriginalExtension();
+
+            $destinationPath = 'uploads';
+            $file->move($destinationPath, $fileName);
+            $pandcardno_2=$fileName;
+        }
+
+
+
+
 
 
         $result = DB::table('details')->insert(
@@ -45,6 +96,10 @@ class ApiController extends Controller
                 'pincode' => $pincode,
                 'aadharno' => $aadharno,
                 'pandcardno' => $pandcardno,
+                'aadharno_1' => $aadharno_1,
+                'aadharno_2' => $aadharno_2,
+                'pandcardno_1' => $pandcardno_1,
+                'pandcardno_2' => $pandcardno_2,
 
             ]
         );
