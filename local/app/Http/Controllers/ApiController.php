@@ -36,7 +36,7 @@ class ApiController extends Controller
         $pandcardno_1="";
         $pandcardno_2="";
         if ($request->hasFile('aadharno_1')) {
-
+     
             $file = $request->file('aadharno_1');
 
             $fileName = 'aadharno_1' . rand() . "_" . date('dmyhis') . "." . $file->getClientOriginalExtension();
@@ -80,9 +80,7 @@ class ApiController extends Controller
         }
 
 
-
-
-
+       
 
         $result = DB::table('details')->insert(
             [
